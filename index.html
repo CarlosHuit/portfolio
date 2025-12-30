@@ -1,444 +1,481 @@
 <!DOCTYPE html>
 <html lang="en" class="dark scroll-smooth">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carlos Huit | Senior Software Engineer</title>
-    <meta name="description" content="Senior Software Engineer building reliable, production-ready web systems.">
-    
-    <!-- Google Fonts: Roboto -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Tailwind Config -->
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                fontFamily: {
-                    sans: ['Roboto', 'sans-serif'],
-                },
-                extend: {
-                  colors: {
-                      // slate: {
-                      //     850: '#1e293b', // Custom depth
-                      //     950: '#020617',
-                      // },
-                      brand: {
-                          light: '#3b82f6', // blue-500
-                          dark: '#60a5fa',  // blue-400
-                      },
-                      dark: {
-                          bg: '#0f172a',    // slate-900
-                          card: '#1e293b',  // slate-800
-                          text: '#f1f5f9',  // slate-100
-                          muted: '#94a3b8'  // slate-400
-                      },
-                      light: {
-                          bg: '#ffffff',
-                          card: '#f8fafc',  // slate-50
-                          text: '#0f172a',  // slate-900
-                          muted: '#475569'  // slate-600
-                      }
-                    },
-                    animation: {
-                        'marquee': 'marquee 40s linear infinite',
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-                    },
-                    keyframes: {
-                        marquee: {
-                            '0%': { transform: 'translateX(0%)' },
-                            '100%': { transform: 'translateX(-50%)' },
-                        },
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carlos Huit | Senior Software Engineer</title>
+  <meta name="description" content="Senior Software Engineer building reliable, production-ready web systems.">
 
-    <style>
-        /* Custom Utilities */
-        body {
-            font-feature-settings: "cv11", "ss01";
-            -webkit-font-smoothing: antialiased;
-        }
-        
-        /* Hide scrollbar for marquee but allow functionality */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+  <!-- Google Fonts: Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
-        /* Modal Transitions */
-        .modal-enter {
-            opacity: 0;
-            transform: scale(0.95);
-        }
-        .modal-enter-active {
-            opacity: 1;
-            transform: scale(1);
-            transition: opacity 300ms, transform 300ms;
-        }
-        .modal-exit {
-            opacity: 1;
-            transform: scale(1);
-        }
-        .modal-exit-active {
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 200ms, transform 200ms;
-        }
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-        /* Observer Animation Classes */
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .reveal-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
-</head>
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-200 transition-colors duration-300 selection:bg-indigo-500 selection:text-white">
-
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 top-0 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md">
-        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" class="text-xl font-bold tracking-tight text-slate-900 dark:text-white uppercase" id="nav-logo">CH.</a>
-            
-            <div class="flex items-center gap-6">
-                <!-- Desktop Nav Links -->
-                <div class="hidden md:flex gap-6 text-sm font-medium" id="nav-links">
-                    <!-- Injected by JS -->
-                </div>
-
-                <div class="flex items-center gap-3 pl-3 border-l border-slate-300 dark:border-slate-700">
-                    <!-- Lang Toggle -->
-                    <button id="lang-toggle" class="text-xs font-bold tracking-wider px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
-                        ES
-                    </button>
-                    <!-- Theme Toggle -->
-                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle Theme">
-                        <!-- Sun Icon -->
-                        <svg id="icon-sun" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                        <!-- Moon Icon -->
-                        <svg id="icon-moon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content Injection Point -->
-    <main id="app" class="pt-16">
-        <!-- Content renders here -->
-    </main>
-
-    <!-- Footer -->
-    <footer class="py-12 border-t border-slate-200 dark:border-slate-800 mt-20">
-        <div class="max-w-5xl mx-auto px-6 text-center text-sm text-slate-500 dark:text-slate-400">
-            <p>&copy; <span id="year"></span> Carlos Huit. <span id="footer-rights"></span></p>
-        </div>
-    </footer>
-
-    <!-- Modal Container -->
-    <div id="modal-backdrop" class="fixed inset-0 z-[60] bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300" aria-hidden="true">
-        <div id="modal-panel" class="bg-white dark:bg-slate-900 w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl border border-slate-200 dark:border-slate-700 transform scale-95 transition-all duration-300 flex flex-col relative" role="dialog" aria-modal="true">
-            <!-- Close Button -->
-            <button id="modal-close" class="absolute top-4 right-4 p-2 text-slate-500 hover:text-slate-800 dark:hover:text-white transition-colors z-10 bg-white/50 dark:bg-black/50 rounded-full">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-            
-            <!-- Modal Content -->
-            <div id="modal-content" class="p-0">
-                <!-- Injected via JS -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Application Logic -->
-    <script>
-        /**
-         * --------------------------------------------------------------------------
-         * DATA STORE (BILINGUAL)
-         * --------------------------------------------------------------------------
-         */
-        const DATA = {
-            en: {
-                nav: {
-                    work: "Work",
-                    process: "Process",
-                    about: "About",
-                    contact: "Contact"
-                },
-                hero: {
-                    name: "Carlos Huit",
-                    title: "Senior Software Engineer",
-                    headline: "I build reliable, production-ready web systems.",
-                    subheadline: "Full-stack engineer with 6+ years of experience delivering real-world software, focused on clarity, maintainability, and results.",
-                    facts: [
-                        "6+ years building production systems",
-                        "Frontend & backend ownership",
-                        "Experience with critical workflows and sensitive data"
-                    ],
-                    ctaPrimary: "View Work",
-                    ctaSecondary: "Contact"
-                },
-                marquee: [
-                    "Production-ready systems",
-                    "Clear deliverables",
-                    "Maintainable code",
-                    "Reliable workflows",
-                    "Long-term support"
-                ],
-                valueProps: [
-                    {
-                        title: "Production mindset",
-                        desc: "I build software with real production constraints in mind — real users, real data, and real failure scenarios — reducing operational risk after delivery."
-                    },
-                    {
-                        title: "Clear deliverables",
-                        desc: "Defined scope, incremental deliveries, and validation checkpoints that reduce rework and align expectations from day one."
-                    },
-                    {
-                        title: "Maintainable systems",
-                        desc: "Readable code, clear structure, and practical documentation that lowers long-term maintenance costs."
-                    }
-                ],
-                work: {
-                    title: "Selected work",
-                    intro: "Examples of systems I’ve worked on, focusing on real use cases and production challenges.",
-                    cases: [
-                        {
-                            id: 1,
-                            title: "Workflow-based review platform",
-                            summary: "Internal system to manage review processes involving sensitive data, multiple states, and auditability.",
-                            image: "https://placehold.co/800x450/1e293b/FFF?text=Review+Platform+UI",
-                            highlights: ["Role-based access and state transitions", "Backend-driven workflows", "Operational dashboards and internal tooling"],
-                            impact: ["Reduced manual handling errors", "Improved traceability and review efficiency"]
-                        },
-                        {
-                            id: 2,
-                            title: "Call routing and integration platform",
-                            summary: "Backend-heavy system handling inbound/outbound communication flows and third-party integrations.",
-                            image: "https://placehold.co/800x450/1e293b/FFF?text=Routing+Architecture",
-                            highlights: ["API integrations", "Event-driven logic", "Reliability and observability concerns"],
-                            impact: ["Stable handling of high-volume events", "Easier operational monitoring"]
-                        }
-                    ]
-                },
-                process: {
-                    title: "How I Work",
-                    steps: [
-                        { step: "01", title: "Understand the problem and constraints", desc: "Avoids building the wrong solution and reduces rework." },
-                        { step: "02", title: "Define scope and expected deliverables", desc: "Ensures clarity on timelines, responsibilities, and acceptance criteria." },
-                        { step: "03", title: "Build incrementally with frequent validation", desc: "Issues are detected early, not at the end of the project." },
-                        { step: "04", title: "Deliver functional, documented software", desc: "Enables smooth handoff, future maintenance, and internal continuity." }
-                    ]
-                },
-                tech: {
-                    title: "Tech Stack",
-                    primary: ["TypeScript", "Node.js", "React", "SQL / NoSQL", "AWS"],
-                    secondary: ["Docker", "Redis", "MongoDB", "PostgreSQL", "CI/CD"],
-                    labels: { primary: "Primary stack", secondary: "Also worked with" }
-                },
-                skills: {
-                    title: "Skills",
-                    categories: [
-                        { name: "Web Development", items: ["Frontend and backend development", "Modern web architectures", "API design"] },
-                        { name: "Data & Systems", items: ["SQL and NoSQL databases", "Data modeling", "System reliability"] },
-                        { name: "Professional Practices", items: ["Security-aware development", "Documentation", "Production support"] }
-                    ]
-                },
-                about: {
-                    title: "About",
-                    text: "I’m a 28-year-old software engineer with over 6 years of experience working on real production systems. I enjoy solving concrete problems and building software that teams can trust and maintain over time."
-                },
-                contact: {
-                    title: "Get in touch",
-                    email: "jchuit.me@gmail.com",
-                    linkedin: "https://linkedin.com/in/huit-carlos",
-                    cvLabel: "Download CV (PDF)",
-                    footerRights: "All rights reserved."
-                }
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        fontFamily: {
+          sans: ['Roboto', 'sans-serif'],
+        },
+        extend: {
+          colors: {
+            // slate: {
+            //     850: '#1e293b', // Custom depth
+            //     950: '#020617',
+            // },
+            brand: {
+              light: '#3b82f6', // blue-500
+              dark: '#60a5fa',  // blue-400
             },
-            es: {
-                nav: {
-                    work: "Proyectos",
-                    process: "Proceso",
-                    about: "Sobre mí",
-                    contact: "Contacto"
-                },
-                hero: {
-                    name: "Carlos Huit",
-                    title: "Ingeniero de Software Senior",
-                    headline: "Construyo sistemas web confiables y listos para producción.",
-                    subheadline: "Desarrollador full stack con más de 6 años de experiencia entregando software real, enfocado en claridad, mantenibilidad y resultados.",
-                    facts: [
-                        "Más de 6 años construyendo sistemas productivos",
-                        "Responsabilidad completa frontend y backend",
-                        "Experiencia en flujos críticos y manejo de datos sensibles"
-                    ],
-                    ctaPrimary: "Ver Proyectos",
-                    ctaSecondary: "Contactar"
-                },
-                marquee: [
-                    "Sistemas listos para producción",
-                    "Entregables claros",
-                    "Código mantenible",
-                    "Flujos confiables",
-                    "Soporte a largo plazo"
-                ],
-                valueProps: [
-                    {
-                        title: "Mentalidad de producción",
-                        desc: "Desarrollo software considerando restricciones reales — usuarios, datos y fallos reales — reduciendo riesgos operativos tras la entrega."
-                    },
-                    {
-                        title: "Entregables claros",
-                        desc: "Alcance definido, entregas incrementales y validaciones que reducen retrabajo y alinean expectativas desde el inicio."
-                    },
-                    {
-                        title: "Sistemas mantenibles",
-                        desc: "Código legible, estructura clara y documentación práctica que reduce costos de mantenimiento a largo plazo."
-                    }
-                ],
-                work: {
-                    title: "Proyectos destacados",
-                    intro: "Ejemplos de sistemas en los que he trabajado, enfocados en casos reales y retos de producción.",
-                    cases: [
-                        {
-                            id: 1,
-                            title: "Plataforma de gestión de revisiones",
-                            summary: "Sistema interno para manejar procesos de revisión con datos sensibles, múltiples estados y trazabilidad.",
-                            image: "https://placehold.co/800x450/1e293b/FFF?text=Plataforma+de+Revision",
-                            highlights: ["Control de acceso por roles", "Flujos basados en estados", "Herramientas internas y dashboards operativos"],
-                            impact: ["Reducción de errores manuales", "Mejor trazabilidad y eficiencia operativa"]
-                        },
-                        {
-                            id: 2,
-                            title: "Plataforma de ruteo de llamadas e integraciones",
-                            summary: "Sistema con fuerte enfoque backend para manejar flujos de comunicación e integraciones externas.",
-                            image: "https://placehold.co/800x450/1e293b/FFF?text=Arquitectura+de+Ruteo",
-                            highlights: ["Integración con APIs externas", "Lógica orientada a eventos", "Confiabilidad y monitoreo"],
-                            impact: ["Manejo estable de eventos de alto volumen", "Mejor visibilidad operativa"]
-                        }
-                    ]
-                },
-                process: {
-                    title: "Cómo trabajo",
-                    steps: [
-                        { step: "01", title: "Entiendo el problema y sus restricciones", desc: "Evita construir la solución incorrecta y reduce retrabajo." },
-                        { step: "02", title: "Defino alcance y entregables esperados", desc: "Asegura claridad en tiempos, responsabilidades y criterios de aceptación." },
-                        { step: "03", title: "Desarrollo incremental con validaciones frecuentes", desc: "Los problemas se detectan temprano, no al final." },
-                        { step: "04", title: "Entrego software funcional y documentado", desc: "Facilita la entrega, el mantenimiento futuro y la continuidad interna." }
-                    ]
-                },
-                tech: {
-                    title: "Tech Stack",
-                    primary: ["TypeScript", "Node.js", "React", "SQL / NoSQL", "AWS"],
-                    secondary: ["Docker", "Redis", "MongoDB", "PostgreSQL", "CI/CD"],
-                    labels: { primary: "Stack principal", secondary: "También he trabajado con" }
-                },
-                skills: {
-                    title: "Habilidades",
-                    categories: [
-                        { name: "Desarrollo Web", items: ["Desarrollo frontend y backend", "Arquitecturas web modernas", "Diseño de APIs"] },
-                        { name: "Datos y Sistemas", items: ["Bases de datos SQL y NoSQL", "Modelado de datos", "Confiabilidad del sistema"] },
-                        { name: "Prácticas Profesionales", items: ["Desarrollo con enfoque en seguridad", "Documentación técnica", "Soporte a producción"] }
-                    ]
-                },
-                about: {
-                    title: "Sobre mí",
-                    text: "Soy un ingeniero de software de 28 años con más de 6 años de experiencia trabajando en sistemas productivos. Me gusta resolver problemas reales y construir software confiable y mantenible en el tiempo."
-                },
-                contact: {
-                    title: "Contacto",
-                    email: "jchuit.me@gmail.com",
-                    linkedin: "https://linkedin.com/in/huit-carlos",
-                    cvLabel: "Descargar CV (PDF)",
-                    footerRights: "Todos los derechos reservados."
-                }
+            dark: {
+              bg: '#0f172a',    // slate-900
+              card: '#1e293b',  // slate-800
+              text: '#f1f5f9',  // slate-100
+              muted: '#94a3b8'  // slate-400
+            },
+            light: {
+              bg: '#ffffff',
+              card: '#f8fafc',  // slate-50
+              text: '#0f172a',  // slate-900
+              muted: '#475569'  // slate-600
             }
-        };
-
-        /**
-         * --------------------------------------------------------------------------
-         * STATE & UTILS
-         * --------------------------------------------------------------------------
-         */
-        let currentLang = 'en';
-
-        // Detect language from URL
-        function detectLanguage() {
-            const path = window.location.pathname;
-            if (path.startsWith('/es')) {
-                return 'es';
+          },
+          animation: {
+            'marquee': 'marquee 40s linear infinite',
+            'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+          },
+          keyframes: {
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-50%)' },
+            },
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
             }
-            return 'en';
+          }
         }
+      }
+    }
+  </script>
 
-        // Initialize State
-        currentLang = detectLanguage();
-        
-        // Theme Logic
-        function initTheme() {
-            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
+  <style>
+    /* Custom Utilities */
+    body {
+      font-feature-settings: "cv11", "ss01";
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Hide scrollbar for marquee but allow functionality */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Modal Transitions */
+    .modal-enter {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    .modal-enter-active {
+      opacity: 1;
+      transform: scale(1);
+      transition: opacity 300ms, transform 300ms;
+    }
+
+    .modal-exit {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .modal-exit-active {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 200ms, transform 200ms;
+    }
+
+    /* Observer Animation Classes */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body
+  class="bg-slate-50 text-slate-800 dark:bg-dark-bg dark:text-slate-200 transition-colors duration-300 selection:bg-indigo-500 selection:text-white">
+
+  <!-- Navigation -->
+  <nav
+    class="fixed w-full z-50 top-0 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-dark-bg/80 backdrop-blur-md">
+    <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#" class="text-xl font-bold tracking-tight text-slate-900 dark:text-white uppercase"
+        id="nav-logo">CH.</a>
+
+      <div class="flex items-center gap-6">
+        <!-- Desktop Nav Links -->
+        <div class="hidden md:flex gap-6 text-sm font-medium" id="nav-links">
+          <!-- Injected by JS -->
+        </div>
+
+        <div class="flex items-center gap-3 pl-3 border-l border-slate-300 dark:border-slate-700">
+          <!-- Lang Toggle -->
+          <button id="lang-toggle"
+            class="text-xs font-bold tracking-wider px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+            ES
+          </button>
+          <!-- Theme Toggle -->
+          <button id="theme-toggle"
+            class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
+            aria-label="Toggle Theme">
+            <!-- Sun Icon -->
+            <svg id="icon-sun" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+              </path>
+            </svg>
+            <!-- Moon Icon -->
+            <svg id="icon-moon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Injection Point -->
+  <main id="app" class="pt-16">
+    <!-- Content renders here -->
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-12 border-t border-slate-200 dark:border-slate-800 mt-20">
+    <div class="max-w-5xl mx-auto px-6 text-center text-sm text-slate-500 dark:text-slate-400">
+      <p>&copy; <span id="year"></span> Carlos Huit. <span id="footer-rights"></span></p>
+    </div>
+  </footer>
+
+  <!-- Modal Container -->
+  <div id="modal-backdrop"
+    class="fixed inset-0 z-[60] bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300"
+    aria-hidden="true">
+    <div id="modal-panel"
+      class="bg-white dark:bg-slate-900 w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl border border-slate-200 dark:border-slate-700 transform scale-95 transition-all duration-300 flex flex-col relative"
+      role="dialog" aria-modal="true">
+      <!-- Close Button -->
+      <button id="modal-close"
+        class="absolute top-4 right-4 p-2 text-slate-500 hover:text-slate-800 dark:hover:text-white transition-colors z-10 bg-white/50 dark:bg-black/50 rounded-full">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <!-- Modal Content -->
+      <div id="modal-content" class="p-0">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Logic -->
+  <script>
+    /**
+     * --------------------------------------------------------------------------
+     * DATA STORE (BILINGUAL)
+     * --------------------------------------------------------------------------
+     */
+    const DATA = {
+      en: {
+        nav: {
+          work: "Work",
+          process: "Process",
+          about: "About",
+          contact: "Contact"
+        },
+        hero: {
+          name: "Carlos Huit",
+          title: "Senior Software Engineer",
+          headline: "I build reliable, production-ready web systems.",
+          subheadline: "Full-stack engineer with 6+ years of experience delivering real-world software, focused on clarity, maintainability, and results.",
+          facts: [
+            "6+ years building production systems",
+            "Frontend & backend ownership",
+            "Experience with critical workflows and sensitive data"
+          ],
+          ctaPrimary: "View Work",
+          ctaSecondary: "Contact"
+        },
+        marquee: [
+          "Production-ready systems",
+          "Clear deliverables",
+          "Maintainable code",
+          "Reliable workflows",
+          "Long-term support"
+        ],
+        valueProps: [
+          {
+            title: "Production mindset",
+            desc: "I build software with real production constraints in mind — real users, real data, and real failure scenarios — reducing operational risk after delivery."
+          },
+          {
+            title: "Clear deliverables",
+            desc: "Defined scope, incremental deliveries, and validation checkpoints that reduce rework and align expectations from day one."
+          },
+          {
+            title: "Maintainable systems",
+            desc: "Readable code, clear structure, and practical documentation that lowers long-term maintenance costs."
+          }
+        ],
+        work: {
+          title: "Selected work",
+          intro: "Examples of systems I’ve worked on, focusing on real use cases and production challenges.",
+          cases: [
+            {
+              id: 1,
+              title: "Workflow-based review platform",
+              summary: "Internal system to manage review processes involving sensitive data, multiple states, and auditability.",
+              image: "https://placehold.co/800x450/1e293b/FFF?text=Review+Platform+UI",
+              highlights: ["Role-based access and state transitions", "Backend-driven workflows", "Operational dashboards and internal tooling"],
+              impact: ["Reduced manual handling errors", "Improved traceability and review efficiency"]
+            },
+            {
+              id: 2,
+              title: "Call routing and integration platform",
+              summary: "Backend-heavy system handling inbound/outbound communication flows and third-party integrations.",
+              image: "https://placehold.co/800x450/1e293b/FFF?text=Routing+Architecture",
+              highlights: ["API integrations", "Event-driven logic", "Reliability and observability concerns"],
+              impact: ["Stable handling of high-volume events", "Easier operational monitoring"]
             }
+          ]
+        },
+        process: {
+          title: "How I Work",
+          steps: [
+            { step: "01", title: "Understand the problem and constraints", desc: "Avoids building the wrong solution and reduces rework." },
+            { step: "02", title: "Define scope and expected deliverables", desc: "Ensures clarity on timelines, responsibilities, and acceptance criteria." },
+            { step: "03", title: "Build incrementally with frequent validation", desc: "Issues are detected early, not at the end of the project." },
+            { step: "04", title: "Deliver functional, documented software", desc: "Enables smooth handoff, future maintenance, and internal continuity." }
+          ]
+        },
+        tech: {
+          title: "Tech Stack",
+          primary: ["TypeScript", "Node.js", "React", "SQL / NoSQL", "AWS"],
+          secondary: ["Docker", "Redis", "MongoDB", "PostgreSQL", "CI/CD"],
+          labels: { primary: "Primary stack", secondary: "Also worked with" }
+        },
+        skills: {
+          title: "Skills",
+          categories: [
+            { name: "Web Development", items: ["Frontend and backend development", "Modern web architectures", "API design"] },
+            { name: "Data & Systems", items: ["SQL and NoSQL databases", "Data modeling", "System reliability"] },
+            { name: "Professional Practices", items: ["Security-aware development", "Documentation", "Production support"] }
+          ]
+        },
+        about: {
+          title: "About",
+          text: "I’m a 28-year-old software engineer with over 6 years of experience working on real production systems. I enjoy solving concrete problems and building software that teams can trust and maintain over time."
+        },
+        contact: {
+          title: "Get in touch",
+          email: "jchuit.me@gmail.com",
+          linkedin: "https://linkedin.com/in/huit-carlos",
+          cvLabel: "Download CV (PDF)",
+          footerRights: "All rights reserved."
         }
-        initTheme();
+      },
+      es: {
+        nav: {
+          work: "Proyectos",
+          process: "Proceso",
+          about: "Sobre mí",
+          contact: "Contacto"
+        },
+        hero: {
+          name: "Carlos Huit",
+          title: "Ingeniero de Software Senior",
+          headline: "Construyo sistemas web confiables y listos para producción.",
+          subheadline: "Desarrollador full stack con más de 6 años de experiencia entregando software real, enfocado en claridad, mantenibilidad y resultados.",
+          facts: [
+            "Más de 6 años construyendo sistemas productivos",
+            "Responsabilidad completa frontend y backend",
+            "Experiencia en flujos críticos y manejo de datos sensibles"
+          ],
+          ctaPrimary: "Ver Proyectos",
+          ctaSecondary: "Contactar"
+        },
+        marquee: [
+          "Sistemas listos para producción",
+          "Entregables claros",
+          "Código mantenible",
+          "Flujos confiables",
+          "Soporte a largo plazo"
+        ],
+        valueProps: [
+          {
+            title: "Mentalidad de producción",
+            desc: "Desarrollo software considerando restricciones reales — usuarios, datos y fallos reales — reduciendo riesgos operativos tras la entrega."
+          },
+          {
+            title: "Entregables claros",
+            desc: "Alcance definido, entregas incrementales y validaciones que reducen retrabajo y alinean expectativas desde el inicio."
+          },
+          {
+            title: "Sistemas mantenibles",
+            desc: "Código legible, estructura clara y documentación práctica que reduce costos de mantenimiento a largo plazo."
+          }
+        ],
+        work: {
+          title: "Proyectos destacados",
+          intro: "Ejemplos de sistemas en los que he trabajado, enfocados en casos reales y retos de producción.",
+          cases: [
+            {
+              id: 1,
+              title: "Plataforma de gestión de revisiones",
+              summary: "Sistema interno para manejar procesos de revisión con datos sensibles, múltiples estados y trazabilidad.",
+              // image: "https://placehold.co/800x450/1e293b/FFF?text=Plataforma+de+Revision",
+              image: "https://res.cloudinary.com/dpffdz8ho/image/upload/v1767053316/92c749v82t3/images/mm-22_gproim.png",
+              highlights: ["Control de acceso por roles", "Flujos basados en estados", "Herramientas internas y dashboards operativos"],
+              impact: ["Reducción de errores manuales", "Mejor trazabilidad y eficiencia operativa"],
+              stack: ["TypeScript", "AWS Lambda", "DynamoDB", "Twilio API"],
+              link: "https://marketplace.twilio.com/apps/marchex-review-platform"
+            },
+            {
+              id: 2,
+              title: "Plataforma de ruteo de llamadas e integraciones",
+              summary: "Sistema con fuerte enfoque backend para manejar flujos de comunicación e integraciones externas.",
+              image: "https://placehold.co/800x450/1e293b/FFF?text=Arquitectura+de+Ruteo",
+              highlights: ["Integración con APIs externas", "Lógica orientada a eventos", "Confiabilidad y monitoreo"],
+              impact: ["Manejo estable de eventos de alto volumen", "Mejor visibilidad operativa"],
+              stack: ["TypeScript", "AWS Lambda", "DynamoDB", "Twilio API"]
+            },
+            {
+                id: 3,
+                title: "Plataforma de ruteo de llamadas",
+                summary: "Sistema con fuerte enfoque backend para manejar flujos de comunicación e integraciones externas.",
+                highlights: ["Integración con APIs externas", "Lógica orientada a eventos", "Confiabilidad y monitoreo"],
+                impact: ["Manejo de +10k eventos diarios", "Cero tiempo de inactividad durante migración"],
+                image: "https://placehold.co/1280x720/3b82f6/FFF?text=Call+Routing",
+                stack: ["TypeScript", "AWS Lambda", "DynamoDB", "Twilio API"],
+            }
+          ]
+        },
+        process: {
+          title: "Cómo trabajo",
+          steps: [
+            { step: "01", title: "Entiendo el problema y sus restricciones", desc: "Evita construir la solución incorrecta y reduce retrabajo." },
+            { step: "02", title: "Defino alcance y entregables esperados", desc: "Asegura claridad en tiempos, responsabilidades y criterios de aceptación." },
+            { step: "03", title: "Desarrollo incremental con validaciones frecuentes", desc: "Los problemas se detectan temprano, no al final." },
+            { step: "04", title: "Entrego software funcional y documentado", desc: "Facilita la entrega, el mantenimiento futuro y la continuidad interna." }
+          ]
+        },
+        tech: {
+          title: "Tech Stack",
+          primary: ["TypeScript", "Node.js", "React", "SQL / NoSQL", "AWS"],
+          secondary: ["Docker", "Redis", "MongoDB", "PostgreSQL", "CI/CD"],
+          labels: { primary: "Stack principal", secondary: "También he trabajado con" }
+        },
+        skills: {
+          title: "Habilidades",
+          categories: [
+            { name: "Desarrollo Web", items: ["Desarrollo frontend y backend", "Arquitecturas web modernas", "Diseño de APIs"] },
+            { name: "Datos y Sistemas", items: ["Bases de datos SQL y NoSQL", "Modelado de datos", "Confiabilidad del sistema"] },
+            { name: "Prácticas Profesionales", items: ["Desarrollo con enfoque en seguridad", "Documentación técnica", "Soporte a producción"] }
+          ]
+        },
+        about: {
+          title: "Sobre mí",
+          text: "Soy un ingeniero de software de 28 años con más de 6 años de experiencia trabajando en sistemas productivos. Me gusta resolver problemas reales y construir software confiable y mantenible en el tiempo."
+        },
+        contact: {
+          title: "Contacto",
+          email: "jchuit.me@gmail.com",
+          linkedin: "https://linkedin.com/in/huit-carlos",
+          cvLabel: "Descargar CV (PDF)",
+          footerRights: "Todos los derechos reservados."
+        }
+      }
+    };
 
-        /**
-         * --------------------------------------------------------------------------
-         * RENDERERS
-         * --------------------------------------------------------------------------
-         */
-        
-        // Helper: SVG Icons (Lucide Style)
-        const icons = {
-            check: `<svg class="w-5 h-5 text-indigo-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`,
-            arrowRight: `<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>`,
-            mail: `<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`,
-            linkedin: `<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="2" fill="none"></circle></svg>`,
-            download: `<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>`,
-            box: `<svg class="w-6 h-6 mb-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>`
-        };
+    /**
+     * --------------------------------------------------------------------------
+     * STATE & UTILS
+     * --------------------------------------------------------------------------
+     */
+    let currentLang = 'en';
 
-        function renderApp() {
-            const content = DATA[currentLang];
-            const app = document.getElementById('app');
-            const navLinks = document.getElementById('nav-links');
-            const langBtn = document.getElementById('lang-toggle');
-            
-            // Update Nav
-            navLinks.innerHTML = `
-                <a href="#work" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">${content.nav.work}</a>
-                <a href="#process" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">${content.nav.process}</a>
-                <a href="#about" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">${content.nav.about}</a>
-                <a href="#contact" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">${content.nav.contact}</a>
-            `;
-            langBtn.textContent = currentLang === 'en' ? 'ES' : 'EN';
-            document.getElementById('footer-rights').textContent = content.contact.footerRights;
-            document.getElementById('year').textContent = new Date().getFullYear();
+    function detectLanguage() {
+      const params = new URLSearchParams(window.location.search);
+      const lang = params.get('lang');
+      return lang === 'es' ? 'es' : 'en';
+    }
 
-            // Render Sections
-            app.innerHTML = `
+    currentLang = detectLanguage();
+
+    function initTheme() {
+
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+
+        document.documentElement.classList.add('dark');
+
+      } else {
+
+        document.documentElement.classList.remove('dark');
+
+      }
+
+    }
+
+    initTheme();
+
+    const icons = {
+      check: `<svg class="w-5 h-5 text-indigo-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`,
+      arrowRight: `<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>`,
+      mail: `<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`,
+      linkedin: `<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="2" fill="none"></circle></svg>`,
+      download: `<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>`,
+      box: `<svg class="w-6 h-6 mb-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>`
+    };
+
+    function renderApp() {
+      const content = DATA[currentLang];
+      const app = document.getElementById('app');
+      const navLinks = document.getElementById('nav-links');
+      const langBtn = document.getElementById('lang-toggle');
+
+      // Update Nav
+      navLinks.innerHTML = `
+        <a href="#work" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">${content.nav.work}</a>
+        <a href="#process" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">${content.nav.process}</a>
+        <a href="#about" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">${content.nav.about}</a>
+        <a href="#contact" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">${content.nav.contact}</a>
+      `;
+
+      langBtn.textContent = currentLang === 'en' ? 'ES' : 'EN';
+
+      document.getElementById('footer-rights').textContent = content.contact.footerRights;
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+
+      app.innerHTML = `
                 <!-- Hero Section -->
                 <section class="min-h-[90vh] flex flex-col justify-center px-6 max-w-5xl mx-auto pt-10 pb-20">
                     <div class="absolute top-20 right-0 w-64 h-64 bg-brand-light/10 dark:bg-brand-dark/10 rounded-full blur-3xl -z-10 animate-pulse"></div>
@@ -491,7 +528,7 @@
                 <section class="py-24 px-6 max-w-5xl mx-auto">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         ${content.valueProps.map((prop, i) => `
-                            <div class="p-6 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-indigo-500/30 transition-colors reveal-on-scroll" style="transition-delay: ${i*100}ms">
+                            <div class="p-6 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-indigo-500/30 transition-colors reveal-on-scroll" style="transition-delay: ${i * 100}ms">
                                 ${icons.box}
                                 <h3 class="text-lg font-bold mb-3 text-slate-900 dark:text-slate-100">${prop.title}</h3>
                                 <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">${prop.desc}</p>
@@ -502,29 +539,48 @@
 
                 <!-- Selected Work -->
                 <section id="work" class="py-24 bg-slate-100/50 dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800">
-                    <div class="max-w-5xl mx-auto px-6">
-                        <div class="mb-12 text-center md:text-left reveal-on-scroll">
-                            <h2 class="text-3xl font-bold mb-4">${content.work.title}</h2>
-                            <p class="text-slate-600 dark:text-slate-400 max-w-2xl">${content.work.intro}</p>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            ${content.work.cases.map((project, i) => `
-                                <article class="group relative bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-indigo-500/50 transition-all duration-300 reveal-on-scroll" style="transition-delay: ${i*100}ms">
-                                    <div class="aspect-video bg-slate-200 dark:bg-slate-800 overflow-hidden relative">
-                                        <div class="absolute inset-0 bg-indigo-900/10 group-hover:bg-transparent transition-colors z-10"></div>
-                                        <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
-                                    </div>
-                                    <div class="p-6">
-                                        <h3 class="text-xl font-bold mb-2 group-hover:text-indigo-500 transition-colors">${project.title}</h3>
-                                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-2">${project.summary}</p>
-                                        <button onclick="openModal(${project.id})" class="text-sm font-semibold text-indigo-600 dark:text-indigo-400 flex items-center hover:underline">
-                                            View Case Study ${icons.arrowRight}
-                                        </button>
-                                    </div>
-                                </article>
-                            `).join('')}
-                        </div>
+                  <div class="max-w-5xl mx-auto px-6">
+                    <div class="mb-12 text-center md:text-left reveal-on-scroll">
+                        <h2 class="text-3xl font-bold mb-4">${content.work.title}</h2>
+                        <p class="text-slate-600 dark:text-slate-400 max-w-2xl">${content.work.intro}</p>
                     </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                      ${
+                        content.work.cases.map((project, i) => {
+                        
+                          const title = currentLang === 'en' ? project.title_en : project.title_es;
+                          const summary = currentLang === 'en' ? project.summary_en : project.summary_es;
+                          const btnText = currentLang === 'en' ? 'View Details' : 'Ver Detalles';
+                          
+                          return `
+                          <div onclick="openModal(${project.id})" class="group reveal cursor-pointer">
+                            <div class="relative overflow-hidden rounded-xl bg-gray-200 dark:bg-gray-800 aspect-video mb-6 border border-gray-200 dark:border-gray-800">
+                              <img src="${project.image}" alt="${title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <span class="px-6 py-2 bg-white text-black font-bold text-sm rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">${btnText}</span>
+                              </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mb-3">
+                              ${
+                                project.stack
+                                  ?.slice(0,3)
+                                  ?.map(tech => {
+                                    return `<span class="text-xs font-mono px-2 py-1 rounded bg-gray-100 dark:bg-gray-800 text-light-muted dark:text-dark-muted">${tech}</span>`;
+                                  })
+                                  ?.join('')
+                              }
+                            </div>
+                            <h3 class="text-2xl font-bold mb-2 group-hover:text-indigo-500 dark:group-hover:text-indigo-500 transition-colors">${title}</h3>
+                            <p class="text-light-muted dark:text-dark-muted leading-relaxed">${summary}</p>
+                          </div>
+                          `;
+
+                        }).join('')
+                      }
+
+                    </div>
+                  </div>
                 </section>
 
                 <!-- How I Work (Timeline) -->
@@ -615,146 +671,182 @@
                 </section>
             `;
 
-            setupIntersectionObserver();
-        }
+      setupIntersectionObserver();
+    }
 
-        /**
-         * --------------------------------------------------------------------------
-         * MODAL LOGIC
-         * --------------------------------------------------------------------------
-         */
-        function openModal(projectId) {
-            const project = DATA[currentLang].work.cases.find(c => c.id === projectId);
-            if (!project) return;
+    /**
+     * --------------------------------------------------------------------------
+     * MODAL LOGIC
+     * --------------------------------------------------------------------------
+     */
+    function openModal(projectId) {
+      console.log('Opening modal for project ID:', projectId);
+      const project = DATA[currentLang].work.cases.find(c => c.id === projectId);
+      console.log('Project data:', project);
+      if (!project) return;
 
-            const modalBackdrop = document.getElementById('modal-backdrop');
-            const modalContent = document.getElementById('modal-content');
-            
-            modalContent.innerHTML = `
-                <div class="relative">
-                    <img src="${project.image}" alt="${project.title}" class="w-full h-48 sm:h-64 object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end">
-                        <div class="p-6 sm:p-8">
-                            <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">${project.title}</h2>
-                            <p class="text-slate-200 text-sm sm:text-base">${project.summary}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-6 sm:p-8 space-y-8">
-                    <div>
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">Highlights</h3>
-                        <ul class="space-y-3">
-                            ${project.highlights.map(h => `
-                                <li class="flex items-start text-slate-700 dark:text-slate-300">
-                                    <span class="text-indigo-500 mr-2 mt-0.5">●</span>
-                                    <span>${h}</span>
-                                </li>
-                            `).join('')}
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">Business Impact</h3>
-                        <ul class="space-y-3">
-                            ${project.impact.map(i => `
-                                <li class="flex items-start text-slate-700 dark:text-slate-300">
-                                    ${icons.check}
-                                    <span>${i}</span>
-                                </li>
-                            `).join('')}
-                        </ul>
-                    </div>
-                </div>
-            `;
+      const modalBackdrop = document.getElementById('modal-backdrop');
+      const modalContent = document.getElementById('modal-content');
 
-            modalBackdrop.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Lock scroll
+      const isEnglish = currentLang === 'en';
+      const summaryTitle = isEnglish ? 'Summary' : 'Resumen';
+      const highlightsTitle = isEnglish ? 'Highlights' : 'Puntos Clave';
+      const impactTitle = isEnglish ? 'Business Impact' : 'Impacto';
+      const hasLink = project.link && project.link.length > 0;
+      const viewProjectText = isEnglish ? 'View Project' : 'Visitar';
+      const btnLink = hasLink ? `
+        <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded font-semibold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-500/20">
+            ${viewProjectText} ${icons.arrowRight}
+        </a>
+      ` : '';
 
-            // Trigger animation
-            requestAnimationFrame(() => {
-                modalBackdrop.classList.remove('opacity-0');
-                const panel = document.getElementById('modal-panel');
-                panel.classList.remove('scale-95');
-                panel.classList.add('scale-100');
-            });
-        }
+      modalContent.innerHTML = `
+        <div class="relative">
+          <img src="${project.image}" alt="${project.title}" class="w-full h-48 sm:h-64 object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end">
+            <div class="p-6 sm:p-8">
+              <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">${project.title}</h2>
+              <p class="text-slate-200 text-sm sm:text-base">${project.summary}</p>
+            </div>
+          </div>
+        </div>
+        <div class="p-6 sm:p-8 space-y-8">
+          <div class="flex flex-wrap gap-2 mb-3">
+            ${project?.stack?.map(s => `
+                <span class="text-xs font-mono px-2 py-1 rounded bg-gray-100 dark:bg-gray-800 text-light-muted dark:text-dark-muted" style="font-weight:500">${s}</span>
+            `)?.join('') || ''}
+          </div>
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">${highlightsTitle}</h3>
+            <ul class="space-y-3">
+                ${project?.highlights?.map(h => `
+                  <li class="flex items-start text-slate-700 dark:text-slate-300">
+                    <span class="text-indigo-500 mr-2 mt-0.5">●</span>
+                    <span>${h}</span>
+                  </li>
+                `)?.join('')}
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">${impactTitle}</h3>
+            <ul class="space-y-3">
+              ${project?.impact?.map(i => `
+                <li class="flex items-start text-slate-700 dark:text-slate-300">
+                  ${icons.check}
+                  <span>${i}</span>
+                </li>
+              `)?.join('')}
+            </ul>
+          </div>
+          ${btnLink}
+        </div>
+      `;
 
-        function closeModal() {
-            const modalBackdrop = document.getElementById('modal-backdrop');
-            const panel = document.getElementById('modal-panel');
-            
-            modalBackdrop.classList.add('opacity-0');
-            panel.classList.remove('scale-100');
-            panel.classList.add('scale-95');
+      modalBackdrop.classList.remove('hidden');
+      document.body.style.overflow = 'hidden'; // Lock scroll
 
-            setTimeout(() => {
-                modalBackdrop.classList.add('hidden');
-                document.body.style.overflow = ''; // Unlock scroll
-            }, 300);
-        }
+      // Trigger animation
+      requestAnimationFrame(() => {
+        modalBackdrop.classList.remove('opacity-0');
+        const panel = document.getElementById('modal-panel');
+        panel.classList.remove('scale-95');
+        panel.classList.add('scale-100');
+      });
+    }
 
-        // Close on backdrop click
-        document.getElementById('modal-backdrop').addEventListener('click', (e) => {
-            if (e.target.id === 'modal-backdrop') closeModal();
+    function closeModal() {
+      const modalBackdrop = document.getElementById('modal-backdrop');
+      const panel = document.getElementById('modal-panel');
+
+      modalBackdrop.classList.add('opacity-0');
+      panel.classList.remove('scale-100');
+      panel.classList.add('scale-95');
+
+      setTimeout(() => {
+        modalBackdrop.classList.add('hidden');
+        document.body.style.overflow = ''; // Unlock scroll
+      }, 300);
+    }
+
+    // Close on backdrop click
+    document.getElementById('modal-backdrop').addEventListener('click', (e) => {
+      if (e.target.id === 'modal-backdrop') closeModal();
+    });
+
+    // Close on ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    document.getElementById('modal-close').addEventListener('click', closeModal);
+
+    /**
+     * --------------------------------------------------------------------------
+     * ANIMATION LOGIC
+     * --------------------------------------------------------------------------
+     */
+    function setupIntersectionObserver() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
         });
+      }, { threshold: 0.1 });
 
-        // Close on ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
-        });
+      document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+    }
 
-        document.getElementById('modal-close').addEventListener('click', closeModal);
+    /**
+     * --------------------------------------------------------------------------
+     * EVENT LISTENERS & INIT
+     * --------------------------------------------------------------------------
+     */
 
-        /**
-         * --------------------------------------------------------------------------
-         * ANIMATION LOGIC
-         * --------------------------------------------------------------------------
-         */
-        function setupIntersectionObserver() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, { threshold: 0.1 });
+    // Theme Toggle
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    });
 
-            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
-        }
+    // Language Toggle (History API)
+    // document.getElementById('lang-toggle').addEventListener('click', () => {
+    //   if (currentLang === 'en') {
+    //     currentLang = 'es';
+    //     window.history.pushState({}, '', '/es');
+    //   } else {
+    //     currentLang = 'en';
+    //     window.history.pushState({}, '', '/');
+    //   }
+    //   renderApp();
+    //   window.scrollTo(0, 0);
+    // });
+    document.getElementById('lang-toggle').addEventListener('click', () => {
+      const url = new URL(window.location.href);
 
-        /**
-         * --------------------------------------------------------------------------
-         * EVENT LISTENERS & INIT
-         * --------------------------------------------------------------------------
-         */
-        
-        // Theme Toggle
-        document.getElementById('theme-toggle').addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark');
-            localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-        });
+      if (currentLang === 'en') {
+        currentLang = 'es';
+        url.searchParams.set('lang', 'es');
+      } else {
+        currentLang = 'en';
+        url.searchParams.delete('lang'); // vuelve a default en (o podés setear lang=en)
+      }
 
-        // Language Toggle (History API)
-        document.getElementById('lang-toggle').addEventListener('click', () => {
-            if (currentLang === 'en') {
-                currentLang = 'es';
-                window.history.pushState({}, '', '/es');
-            } else {
-                currentLang = 'en';
-                window.history.pushState({}, '', '/');
-            }
-            renderApp();
-            window.scrollTo(0,0);
-        });
+      window.history.pushState({}, '', url.toString());
+      renderApp();
+      window.scrollTo(0, 0);
+    });
 
-        // Handle Browser Back/Forward
-        window.addEventListener('popstate', () => {
-            currentLang = detectLanguage();
-            renderApp();
-        });
+    // Handle Browser Back/Forward
+    window.addEventListener('popstate', () => {
+      currentLang = detectLanguage();
+      renderApp();
+    });
 
-        // Initial Render
-        renderApp();
+    // Initial Render
+    renderApp();
 
-    </script>
+  </script>
 </body>
+
 </html>
